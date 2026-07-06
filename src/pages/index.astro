@@ -1,0 +1,338 @@
+---
+import Base from '../layouts/Base.astro';
+
+const features = [
+  {
+    title: 'Keeps your folder tree intact',
+    body: 'Export whole folders — nested subfolders and all — exactly as they sit in SAP Logon. Nothing gets flattened.',
+    icon: 'tree',
+  },
+  {
+    title: 'Blocks duplicates on import',
+    body: 'Systems already on the target machine are skipped, not duplicated. You see in red what will be blocked before anything is written.',
+    icon: 'shield',
+  },
+  {
+    title: 'Carries router & message server',
+    body: 'When a system references a SAP router or logon group, those dependencies travel with it — so the connection still works on the other machine.',
+    icon: 'link',
+  },
+  {
+    title: 'Backs up to your cloud',
+    body: 'Save a timestamped copy straight into your OneDrive, Google Drive or Dropbox folder. Restore it on any machine.',
+    icon: 'cloud',
+  },
+  {
+    title: 'Six languages',
+    body: 'English, Tiếng Việt, 日本語, Français, Deutsch, 简体中文 — switch from the menu, the whole UI follows.',
+    icon: 'globe',
+  },
+  {
+    title: 'No passwords, ever',
+    body: 'Only connection details move — system list, servers, routers. SAP Logon never stores passwords in these files, and neither does the tool.',
+    icon: 'lock',
+  },
+];
+
+const steps = [
+  { n: '01', t: 'Load your config', d: 'Auto-detect finds SAPUILandscape.xml in %APPDATA%\\SAP\\Common, or point it at any file.' },
+  { n: '02', t: 'Pick what to move', d: 'Tick whole folders or single systems. Search filters hundreds of entries in a keystroke.' },
+  { n: '03', t: 'Export or back up', d: 'Write a file to share, or push a backup to your cloud folder. Filenames are named for what you exported.' },
+  { n: '04', t: 'Import on the other machine', d: 'Preview shows new vs. duplicate, a .bak is written first, then only the new systems are added.' },
+];
+
+const guides = [
+  { t: 'Install SAP Logon Transfer', d: 'Download, run, and — if you want — build the single-file .exe yourself.', href: '/guides/install-sap-logon-transfer/', tag: 'Getting started' },
+  { t: 'Where is SAPUILandscape.xml?', d: 'What the file is, where Windows keeps it, and how its folders and services fit together.', href: '/guides/what-is-sapuilandscape-xml/', tag: 'Reference' },
+  { t: 'Move SAP GUI to a new machine', d: 'The clean way to carry your whole system list to a replacement laptop.', href: '/guides/move-sap-gui-new-machine/', tag: 'How-to' },
+];
+
+function icon(name) {
+  const p = {
+    tree: '<path d="M4 5h7M4 12h10M8 12v-5M8 19h9M12 19v-5"/>',
+    shield: '<path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/>',
+    link: '<path d="M9 15l6-6M8 8H6a4 4 0 000 8h2M16 16h2a4 4 0 000-8h-2"/>',
+    cloud: '<path d="M6 16a4 4 0 010-8 5 5 0 019.6-1.3A3.5 3.5 0 0118 16z"/>',
+    globe: '<circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c2.5 2.5 2.5 13 0 16M12 4c-2.5 2.5-2.5 13 0 16"/>',
+    lock: '<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>',
+  };
+  return p[name] || '';
+}
+
+// FAQ — targets real questions SAP admins search for
+const faqs = [
+  {
+    q: "How do I move my SAP Logon settings to a new computer?",
+    a: "Export your system list from the old machine with SAP Logon Transfer, copy the file across (or use cloud backup), then import it on the new machine. Folders, routers and logon groups are carried over, and you never retype a connection.",
+  },
+  {
+    q: "Where is the SAP Logon configuration file stored?",
+    a: "SAP GUI 7.10 and later store your system list in SAPUILandscape.xml, located at %APPDATA%\\SAP\\Common\\SAPUILandscape.xml. Older versions used saplogon.ini.",
+  },
+  {
+    q: "Does SAP Logon Transfer copy passwords?",
+    a: "No. It only handles connection details — system IDs, servers and routers. SAP Logon never stores passwords in these files, and neither does the tool.",
+  },
+  {
+    q: "Is SAP Logon Transfer free?",
+    a: "Yes, it is free software. It runs on Windows 10 and 11, needs no installation, and requires no .NET runtime — it's a single portable .exe.",
+  },
+  {
+    q: "Will it create duplicate systems when I import?",
+    a: "No. Before importing, a preview shows which systems are new and which already exist. Duplicates are blocked, only new systems are added, and a backup is written first.",
+  },
+];
+
+// Structured data: tells Google this is a free Windows software app
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "SAP Logon Transfer",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Windows 10, Windows 11",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Free tool for SAP Basis admins to move, back up and document the SAP Logon system list (SAPUILandscape.xml) between machines. Keeps folders and routers, blocks duplicates, and never stores passwords.",
+      "url": "https://basistoolkit.com/",
+      "author": { "@type": "Person", "name": "Giang Pham" },
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqs.map((f) => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": { "@type": "Answer", "text": f.a },
+      })),
+    },
+  ],
+};
+---
+<Base
+  title="SAP Logon Transfer — free tool to move SAP GUI config between machines"
+  description="Free tool to transfer, back up and document your SAP Logon system list (SAPUILandscape.xml) between machines. For SAP Basis admins — keeps folders and routers, blocks duplicates, no passwords."
+  keywords="SAP Logon transfer, move SAP GUI to new computer, SAPUILandscape.xml, copy SAP Logon settings, SAP GUI configuration transfer, SAP Basis tools, backup SAP Logon, SAP connection list"
+  path="/"
+  jsonLd={jsonLd}
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow">Freeware for SAP Basis</span>
+        <h1>Move your SAP&nbsp;Logon setup<br />between machines — cleanly.</h1>
+        <p class="hero-lead">
+          BasisToolkit's SAP Logon Transfer copies your system list from one PC to another
+          with folders, routers and logon groups intact — and never touches a password.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/download/">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+            Download free
+          </a>
+          <a class="btn btn-ghost" href="/guides/install-sap-logon-transfer/">Read the install guide</a>
+        </div>
+        <p class="hero-path"><span>reads</span> <code>%APPDATA%\SAP\Common\SAPUILandscape.xml</code></p>
+      </div>
+
+      <!-- signature visual: two SAP Logon windows + transfer, anonymized sample data -->
+      <!-- signature visual: real anonymized app screenshot -->
+      <div class="hero-visual" aria-hidden="true">
+        <img class="hero-shot" src="/app-screenshot.png"
+             alt="SAP Logon Transfer app moving SAP GUI system list between machines, showing folders, SID and server columns" />
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <section class="strip">
+    <div class="wrap strip-inner">
+      <div><b>Free</b><span>no licence, no ads in-app</span></div>
+      <div><b>190+ systems</b><span>tested on real Basis landscapes</span></div>
+      <div><b>6 languages</b><span>EN · VI · JA · DE · ZH · FR</span></div>
+      <div><b>Windows</b><span>single portable .exe</span></div>
+    </div>
+  </section>
+
+  <!-- TOOL / FEATURES -->
+  <section class="section" id="tool">
+    <div class="wrap">
+      <span class="eyebrow">What it does</span>
+      <h2 class="sec-title">Built for the way Basis admins actually work</h2>
+      <p class="sec-sub muted">Every SAP Logon export tool copies a file. This one understands what's inside it.</p>
+
+      <div class="feature-grid">
+        {features.map((f) => (
+          <article class="feature">
+            <span class="feature-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" set:html={icon(f.icon)} />
+            </span>
+            <h3>{f.title}</h3>
+            <p class="muted">{f.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section section-tint">
+    <div class="wrap">
+      <span class="eyebrow">How it works</span>
+      <h2 class="sec-title">Four steps, no surprises</h2>
+      <ol class="steps">
+        {steps.map((s) => (
+          <li class="step">
+            <span class="step-n">{s.n}</span>
+            <div>
+              <h3>{s.t}</h3>
+              <p class="muted">{s.d}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- GUIDES -->
+  <section class="section" id="guides">
+    <div class="wrap">
+      <div class="guides-head">
+        <div>
+          <span class="eyebrow">Guides</span>
+          <h2 class="sec-title">Learn the setup, not just the download</h2>
+        </div>
+        <a class="btn btn-ghost" href="/guides/">All guides</a>
+      </div>
+      <div class="guide-grid">
+        {guides.map((g) => (
+          <a class="guide-card" href={g.href}>
+            <span class="guide-tag">{g.tag}</span>
+            <h3>{g.t}</h3>
+            <p class="muted">{g.d}</p>
+            <span class="guide-more">Read →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ (targets real search questions + FAQ rich results) -->
+  <section class="section section-tint" id="faq">
+    <div class="wrap faq-wrap">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="sec-title">Common questions</h2>
+      <div class="faq-list">
+        {faqs.map((item) => (
+          <details class="faq-item">
+            <summary>{item.q}</summary>
+            <p class="muted">{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="wrap cta-inner">
+      <div>
+        <h2>Get SAP Logon Transfer</h2>
+        <p class="muted">Free, portable, and yours to keep. Works on Windows 10 and 11.</p>
+      </div>
+      <a class="btn btn-primary btn-lg" href="/download/">Download for Windows</a>
+    </div>
+  </section>
+
+  <style>
+    .sec-title { font-size: var(--step-2); margin-bottom: 0.4rem; }
+    .sec-sub { font-size: var(--step-1); max-width: 60ch; margin-bottom: 2.5rem; }
+
+    /* HERO */
+    .hero { padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(2rem, 4vw, 3rem);
+      background:
+        radial-gradient(120% 90% at 85% 0%, var(--blue-tint) 0%, transparent 55%),
+        var(--paper);
+    }
+    .hero-inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+    .hero-copy h1 { font-size: var(--step-4); font-weight: 700; }
+    .hero-lead { font-size: var(--step-1); color: var(--slate); max-width: 46ch; margin-top: 1rem; }
+    .hero-actions { display: flex; gap: 0.8rem; margin-top: 1.8rem; flex-wrap: wrap; }
+    .hero-path { margin-top: 1.6rem; font-size: var(--step--1); color: var(--slate-soft); display: flex; align-items: center; gap: 0.5rem; }
+    .hero-path span { font-family: var(--font-mono); }
+
+    /* signature visual */
+    .hero-visual { position: relative; display: flex; align-items: flex-start; justify-content: center; padding-top: 2.5rem; }
+    .hero-shot {
+      width: 100%; height: auto; max-width: 620px; display: block;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      box-shadow:
+        0 2px 6px rgba(14, 26, 43, 0.06),
+        0 24px 48px -18px rgba(10, 110, 209, 0.28);
+    }
+
+    /* TRUST STRIP */
+    .strip { border-block: 1px solid var(--line); background: #fff; }
+    .strip-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; padding-block: 1.4rem; }
+    .strip-inner div { display: flex; flex-direction: column; gap: 0.1rem; }
+    .strip-inner b { font-family: var(--font-display); font-size: 1.1rem; }
+    .strip-inner span { font-size: var(--step--1); color: var(--slate-soft); }
+
+    /* FEATURES */
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .feature { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem; transition: border-color .15s, transform .15s; }
+    .feature:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+    .feature-icon { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 10px; background: var(--blue-tint); color: var(--blue); margin-bottom: 0.9rem; }
+    .feature h3 { font-size: var(--step-1); margin-bottom: 0.35rem; }
+    .feature p { margin: 0; font-size: 0.96rem; }
+
+    /* STEPS */
+    .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem 2.5rem; counter-reset: none; }
+    .step { display: flex; gap: 1rem; align-items: flex-start; }
+    .step-n { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500; color: var(--blue); border: 1px solid var(--line-strong); border-radius: 6px; padding: 0.2rem 0.5rem; flex: none; margin-top: 0.2rem; }
+    .step h3 { font-size: var(--step-1); margin-bottom: 0.2rem; }
+    .step p { margin: 0; font-size: 0.96rem; }
+
+    /* GUIDES */
+    .guides-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; }
+    .guides-head .sec-title { margin: 0; }
+    .guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .guide-card { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem; color: var(--ink); transition: border-color .15s, transform .15s; }
+    .guide-card:hover { border-color: var(--blue); transform: translateY(-2px); }
+    .guide-tag { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue); margin-bottom: 0.7rem; }
+    .guide-card h3 { font-size: var(--step-1); margin-bottom: 0.4rem; }
+    .guide-card .muted { flex: 1; font-size: 0.94rem; }
+    .guide-more { color: var(--blue); font-weight: 600; font-size: 0.92rem; margin-top: 0.8rem; }
+
+    /* FAQ */
+    .faq-wrap { max-width: 780px; }
+    .faq-list { margin-top: 1.8rem; display: flex; flex-direction: column; gap: 0.6rem; }
+    .faq-item { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 0 1.2rem; }
+    .faq-item summary { cursor: pointer; padding: 1rem 0; font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: "+"; color: var(--blue); font-size: 1.4rem; font-weight: 400; flex: none; }
+    .faq-item[open] summary::after { content: "–"; }
+    .faq-item p { margin: 0 0 1.1rem; font-size: 0.97rem; }
+
+    /* CTA */
+    .cta { background: linear-gradient(120deg, var(--blue) 0%, var(--blue-dark) 100%); }
+    .cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding-block: clamp(2.5rem, 5vw, 3.5rem); flex-wrap: wrap; }
+    .cta h2 { color: #fff; font-size: var(--step-2); margin-bottom: 0.3rem; }
+    .cta .muted { color: #CFE4FA; }
+    .btn-lg { padding: 0.9rem 1.8rem; font-size: var(--step-1); }
+    .cta .btn-primary { background: #fff; color: var(--blue-dark); }
+    .cta .btn-primary:hover { background: #EAF3FC; color: var(--blue-dark); }
+
+    @media (max-width: 900px) {
+      .feature-grid, .guide-grid { grid-template-columns: repeat(2, 1fr); }
+      .strip-inner { grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    }
+    @media (max-width: 760px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { order: -1; min-height: 190px; }
+      .feature-grid, .guide-grid, .steps { grid-template-columns: 1fr; }
+      .guides-head { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</Base>

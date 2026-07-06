@@ -1,0 +1,103 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// As you publish, add entries here. Keep newest first.
+const guides = [
+  {
+    t: 'How to move SAP GUI to a new computer',
+    d: 'Carry your entire system list to a replacement laptop without retyping a single connection.',
+    href: '/guides/move-sap-gui-new-machine/',
+    tag: 'How-to',
+  },
+  {
+    t: 'How to install SAP GUI on Windows',
+    d: 'Step-by-step install: getting the installer, choosing components, and adding your first system.',
+    href: '/guides/install-sap-gui-windows/',
+    tag: 'How-to',
+  },
+  {
+    t: 'How to install SAP GUI for Mac',
+    d: 'SAP GUI for Java on macOS — the Java requirement, install steps, and how it differs from Windows.',
+    href: '/guides/install-sap-gui-mac/',
+    tag: 'How-to',
+  },
+  {
+    t: 'Back up SAP GUI settings before reinstalling Windows',
+    d: 'The one file to save so you can restore every system in seconds after a wipe or new PC.',
+    href: '/guides/backup-sap-gui-settings/',
+    tag: 'How-to',
+  },
+  {
+    t: 'How to add a system to SAP Logon manually',
+    d: 'Add a system by hand — application server or group/message server logon — field by field.',
+    href: '/guides/add-system-to-sap-logon/',
+    tag: 'How-to',
+  },
+  {
+    t: 'How to configure a SAP router string',
+    d: 'Reach systems behind a saprouter: what a router string is and how to add one to a connection.',
+    href: '/guides/configure-sap-router/',
+    tag: 'How-to',
+  },
+  {
+    t: 'SAP Logon vs SAP Logon Pad: the difference',
+    d: 'Why there are two clients, which one lets you edit your list, and which you should use.',
+    href: '/guides/sap-logon-vs-sap-logon-pad/',
+    tag: 'Reference',
+  },
+  {
+    t: 'Where is SAPUILandscape.xml, and what is in it?',
+    d: 'The file SAP GUI 7.10+ uses for your system list — its location, structure, and how folders map to services.',
+    href: '/guides/what-is-sapuilandscape-xml/',
+    tag: 'Reference',
+  },
+  {
+    t: 'How to install SAP Logon Transfer',
+    d: 'Download and run the tool, or build the single-file .exe yourself.',
+    href: '/guides/install-sap-logon-transfer/',
+    tag: 'Getting started',
+  },
+];
+---
+<Base
+  title="Guides — SAP Logon, SAP GUI & Basis how-tos | BasisToolkit"
+  description="Practical guides for SAP Basis admins: installing SAP Logon Transfer, understanding SAPUILandscape.xml, moving SAP GUI between machines, and more."
+  path="/guides/"
+>
+  <section class="ghead">
+    <div class="wrap">
+      <span class="eyebrow">Guides</span>
+      <h1>SAP Logon &amp; Basis how-tos</h1>
+      <p class="lead muted">Straight, tested walkthroughs — no filler. Written by a working SAP consultant.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="glist">
+        {guides.map((g) => (
+          <a class="gcard" href={g.href}>
+            <span class="gtag">{g.tag}</span>
+            <h2>{g.t}</h2>
+            <p class="muted">{g.d}</p>
+            <span class="gmore">Read →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .ghead { padding-block: clamp(2.5rem, 6vw, 4rem) 0; }
+    .ghead h1 { font-size: var(--step-3); }
+    .ghead .lead { font-size: var(--step-1); max-width: 55ch; }
+    .glist { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    .gcard { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem; color: var(--ink); transition: border-color .15s, transform .15s; }
+    .gcard:hover { border-color: var(--blue); transform: translateY(-2px); }
+    .gtag { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue); margin-bottom: 0.7rem; }
+    .gcard h2 { font-size: var(--step-1); margin-bottom: 0.4rem; }
+    .gcard .muted { flex: 1; font-size: 0.95rem; }
+    .gmore { color: var(--blue); font-weight: 600; font-size: 0.92rem; margin-top: 0.9rem; }
+    @media (max-width: 760px) { .glist { grid-template-columns: 1fr; } }
+  </style>
+</Base>

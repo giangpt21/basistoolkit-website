@@ -1,0 +1,60 @@
+---
+import Guide from '../../layouts/Guide.astro';
+---
+<Guide
+  title="SAP Logon vs SAP Logon Pad: what's the difference?"
+  description="SAP Logon and SAP Logon Pad look almost identical but behave differently. Here's what each one is, who should use which, and how it affects editing your system list."
+  keywords="SAP Logon vs SAP Logon Pad, difference SAP Logon Pad, saplogon saplgpad, SAP Logon Pad meaning, what is SAP Logon Pad"
+  path="/guides/sap-logon-vs-sap-logon-pad/"
+  tag="Reference"
+  updated="February 2026"
+>
+  <p>
+    If you've noticed both <strong>SAP Logon</strong> and <strong>SAP Logon Pad</strong>
+    on your machine and wondered which to use, they're two faces of the same client with
+    one key difference: whether you can edit the system list.
+  </p>
+
+  <h2>The short answer</h2>
+  <ul>
+    <li><strong>SAP Logon</strong> (<code>saplogon.exe</code>) — the full client. You can add, edit, delete and organise systems yourself.</li>
+    <li><strong>SAP Logon Pad</strong> (<code>saplgpad.exe</code>) — a locked-down view. You can connect to systems, but you cannot change the list. It's meant for centrally managed environments.</li>
+  </ul>
+
+  <h2>Why two versions exist</h2>
+  <p>
+    In larger organisations, the Basis team wants everyone to use the same, approved list
+    of systems — no accidental edits, no rogue entries. SAP Logon Pad reads a
+    centrally distributed configuration and presents it read-only, so users get a
+    consistent list that IT controls. SAP Logon, by contrast, lets each user maintain
+    their own entries.
+  </p>
+
+  <h2>How the configuration differs</h2>
+  <p>
+    Both read the same kind of landscape file, but the Pad typically points at a
+    <strong>global</strong> configuration pushed by an administrator
+    (<code>SAPUILandscapeGlobal.xml</code>), while SAP Logon works with your
+    <strong>local</strong> <code>SAPUILandscape.xml</code>. See
+    <a href="/guides/what-is-sapuilandscape-xml/">where SAPUILandscape.xml lives and what's in it</a>
+    for the details.
+  </p>
+  <blockquote>
+    If you can't add or edit systems, you're probably running SAP Logon Pad, not SAP
+    Logon. Launch <code>saplogon.exe</code> instead — if it's available to you.
+  </blockquote>
+
+  <h2>Which should you use?</h2>
+  <ul>
+    <li><strong>Consultant or admin managing your own systems</strong> — use SAP Logon, so you can maintain your list and move it between machines.</li>
+    <li><strong>End user in a managed environment</strong> — you'll likely be given SAP Logon Pad, and the list is maintained for you.</li>
+  </ul>
+
+  <h2>Moving your list between machines</h2>
+  <p>
+    Because SAP Logon lets you own your list, it's the one that benefits from a transfer
+    tool. If you maintain your own systems and switch computers, export and import them
+    with <a href="/download/">SAP Logon Transfer</a> instead of retyping — folders,
+    routers and logon groups included.
+  </p>
+</Guide>

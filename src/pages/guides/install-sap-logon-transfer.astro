@@ -1,0 +1,73 @@
+---
+import Guide from '../../layouts/Guide.astro';
+---
+<Guide
+  title="How to install SAP Logon Transfer on Windows"
+  description="Step-by-step: download and run SAP Logon Transfer on Windows 10 or 11, or build the single-file .exe yourself. Free tool for SAP Basis admins, no installation needed."
+  keywords="install SAP Logon Transfer, SAP Logon tool Windows, SAP GUI utility download, run SAP Logon Transfer, SAP Basis freeware"
+  path="/guides/install-sap-logon-transfer/"
+  tag="Getting started"
+  updated="February 2026"
+>
+  <p>
+    SAP Logon Transfer is a portable Windows app — there is nothing to install.
+    You can either download the ready-made <code>.exe</code> and run it, or build
+    it yourself from the Python source. This guide covers both.
+  </p>
+
+  <h2>Option 1 — Run the downloaded app</h2>
+  <ol>
+    <li>Go to the <a href="/download/">download page</a> and save the <code>.exe</code>.</li>
+    <li>Double-click it. No installer runs; the window opens directly.</li>
+    <li>
+      On first launch Windows may show a SmartScreen notice because the app is new
+      and unsigned. Choose <em>More info → Run anyway</em>. If your organisation blocks
+      unsigned apps, use Option 2 to build it in-house.
+    </li>
+  </ol>
+
+  <blockquote>
+    The app only reads and writes your SAP Logon configuration files. It does not
+    touch the network, the registry, or any password store.
+  </blockquote>
+
+  <h2>Option 2 — Build the .exe yourself</h2>
+  <p>
+    Building from source means you run exactly the code you can read. You need a
+    Windows machine with <strong>Python 3.9+</strong> installed (tick
+    <em>“Add Python to PATH”</em> during setup).
+  </p>
+
+  <h3>1. Install the build tools</h3>
+  <pre><code>pip install pyinstaller PySide6 openpyxl</code></pre>
+
+  <h3>2. Build a single portable .exe</h3>
+  <p>From the folder containing the source files, run:</p>
+  <pre><code>pyinstaller --onefile --windowed \
+  --name "SAP Logon Transfer" --icon=app.ico \
+  sap_logon_transfer_qt.py</code></pre>
+  <p>
+    Keep <code>sapconfig.py</code>, <code>i18n.py</code>, <code>cloud.py</code> and
+    <code>report.py</code> in the same folder — PyInstaller bundles them automatically.
+  </p>
+
+  <h3>3. Find your app</h3>
+  <p>The finished app is at <code>dist\SAP Logon Transfer.exe</code>. Copy it anywhere.</p>
+
+  <h2>Smaller or faster builds</h2>
+  <p>
+    Two ready-made scripts ship with the source. <code>build_small.bat</code> excludes
+    Qt modules the tool never uses to shrink the file; <code>build_onedir.bat</code>
+    produces a folder that starts instantly instead of unpacking on each launch. Both
+    build inside a clean virtual environment so no stray libraries get bundled.
+  </p>
+
+  <h2>First run</h2>
+  <p>
+    Click <strong>Auto-detect</strong> and the tool finds your SAP Logon config at
+    <code>%APPDATA%\SAP\Common\SAPUILandscape.xml</code>. From there you can export
+    folders, import onto another machine, back up to your cloud folder, or export a
+    report. See <a href="/guides/what-is-sapuilandscape-xml/">what that file contains</a>
+    if you're curious about the format.
+  </p>
+</Guide>

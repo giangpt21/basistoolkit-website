@@ -1,0 +1,186 @@
+---
+import '../styles/global.css';
+
+const {
+  title = 'BasisToolkit — Free tools for SAP Basis admins',
+  description = 'Free, no-nonsense utilities for SAP Basis administrators and consultants. Transfer, back up and document your SAP Logon configuration across machines.',
+  path = '/',
+  keywords = 'SAP Logon, SAP GUI, SAPUILandscape.xml, SAP Basis, transfer SAP Logon, SAP GUI configuration, SAP connection list, SAP Basis tools',
+  ogImage = '/app-screenshot.png',
+  jsonLd = null,
+} = Astro.props;
+
+const site = 'https://basistoolkit.com';
+const canonical = site + path;
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="Giang Pham" />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="BasisToolkit" />
+    <meta property="og:image" content={site + ogImage} />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={site + ogImage} />
+
+    <!-- Structured data (per-page) -->
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+
+    <!-- fonts: display + body + mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href="/" aria-label="BasisToolkit home">
+          <span class="brand-mark" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <rect x="1" y="6" width="9" height="14" rx="2" fill="#0A6ED1"/>
+              <rect x="16" y="6" width="9" height="14" rx="2" fill="#0A6ED1" opacity="0.55"/>
+              <path d="M11 11.5h3.2v-1.6l2.6 2.1-2.6 2.1v-1.6H11z" fill="#E9730C"/>
+            </svg>
+          </span>
+          <span class="brand-name">Basis<span class="brand-name-accent">Toolkit</span></span>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/#tool">The tool</a>
+          <a href="/download/">Download</a>
+          <a href="/guides/">Guides</a>
+          <a href="/about/">About</a>
+          <a class="nav-cta" href="/download/">Get it free</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div class="footer-brand">
+          <span class="brand-name">Basis<span class="brand-name-accent">Toolkit</span></span>
+          <p class="muted">Free utilities for SAP Basis administrators and consultants.</p>
+        </div>
+        <nav class="footer-cols" aria-label="Footer">
+          <div>
+            <h4>Product</h4>
+            <a href="/#tool">SAP Logon Transfer</a>
+            <a href="/download/">Download</a>
+            <a href="/changelog/">Changelog</a>
+          </div>
+          <div>
+            <h4>Learn</h4>
+            <a href="/guides/">All guides</a>
+            <a href="/guides/install-sap-logon-transfer/">Install guide</a>
+            <a href="/guides/what-is-sapuilandscape-xml/">SAPUILandscape.xml</a>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <a href="mailto:giangpt@outlook.com">giangpt@outlook.com</a>
+            <a href="/about/">About the author</a>
+          </div>
+        </nav>
+      </div>
+      <div class="wrap footer-legal">
+        <p class="muted">© {year} BasisToolkit · Freeware · Built by Giang Phạm.
+          Not affiliated with or endorsed by SAP SE. “SAP” is a trademark of SAP SE.</p>
+      </div>
+    </footer>
+
+    <style>
+      .skip {
+        position: absolute; left: -999px; top: 0;
+        background: var(--blue); color: #fff; padding: 0.6rem 1rem; z-index: 100;
+        border-radius: 0 0 8px 0;
+      }
+      .skip:focus { left: 0; color: #fff; }
+
+      .site-header {
+        position: sticky; top: 0; z-index: 50;
+        background: rgba(251,252,254,0.85);
+        backdrop-filter: saturate(1.4) blur(10px);
+        border-bottom: 1px solid var(--line);
+      }
+      .header-inner {
+        display: flex; align-items: center; justify-content: space-between;
+        height: 66px;
+      }
+      .brand { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ink); }
+      .brand-mark { display: inline-flex; }
+      .brand-name {
+        font-family: var(--font-display); font-weight: 700; font-size: 1.15rem;
+        letter-spacing: -0.02em;
+      }
+      .brand-name-accent { color: var(--blue); }
+
+      .site-nav { display: flex; align-items: center; gap: 1.6rem; }
+      .site-nav a { color: var(--slate); font-weight: 500; font-size: 0.96rem; }
+      .site-nav a:hover { color: var(--ink); }
+      .site-nav .nav-cta {
+        background: var(--blue); color: #fff; padding: 0.5rem 1rem;
+        border-radius: var(--radius-sm); font-weight: 600;
+      }
+      .site-nav .nav-cta:hover { background: var(--blue-dark); color: #fff; }
+
+      @media (max-width: 760px) {
+        .site-nav { gap: 0.9rem; }
+        .site-nav a:not(.nav-cta) { display: none; }
+      }
+
+      .site-footer {
+        margin-top: 4rem;
+        background: var(--ink);
+        color: #C4D2E2;
+      }
+      .footer-inner {
+        display: grid; grid-template-columns: 1.4fr 2fr; gap: 2.5rem;
+        padding-block: 3rem 2rem;
+      }
+      .footer-brand .brand-name { color: #fff; font-size: 1.25rem; }
+      .footer-brand .brand-name-accent { color: #6FB2F0; }
+      .footer-brand .muted { color: #91A4B8; max-width: 30ch; margin-top: 0.5rem; }
+      .footer-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+      .footer-cols h4 {
+        font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase;
+        letter-spacing: 0.1em; color: #6FB2F0; font-weight: 500; margin-bottom: 0.9rem;
+      }
+      .footer-cols a { display: block; color: #C4D2E2; font-size: 0.92rem; margin-bottom: 0.5rem; }
+      .footer-cols a:hover { color: #fff; }
+      .footer-legal { padding-bottom: 2rem; }
+      .footer-legal .muted { color: #7F92A6; font-size: 0.82rem; }
+      @media (max-width: 760px) {
+        .footer-inner { grid-template-columns: 1fr; gap: 1.8rem; }
+        .footer-cols { grid-template-columns: repeat(2, 1fr); }
+      }
+    </style>
+  </body>
+</html>

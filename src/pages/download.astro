@@ -1,0 +1,126 @@
+---
+import Base from '../layouts/Base.astro';
+
+// ⬇️ THAY LINK NÀY nếu tên dự án SourceForge của bạn khác.
+// Định dạng: https://sourceforge.net/projects/TÊN-DỰ-ÁN/files/latest/download
+const downloadUrl = 'https://sourceforge.net/projects/sap-logon-transfer/files/latest/download';
+
+const version = '1.1.1';
+const requirements = [
+  'Windows 10 or Windows 11',
+  'SAP GUI 7.10 – 8.x (SAPUILandscape.xml), or legacy saplogon.ini',
+  'No install needed — single portable .exe',
+];
+---
+<Base
+  title="Download SAP Logon Transfer — free | BasisToolkit"
+  description="Download SAP Logon Transfer for Windows. Free portable tool to move, back up and document your SAP Logon system list. No install, no passwords stored."
+  path="/download/"
+>
+  <section class="dl">
+    <div class="wrap dl-inner">
+      <div class="dl-main">
+        <span class="eyebrow">Download · v{version}</span>
+        <h1>SAP Logon Transfer</h1>
+        <p class="lead muted">
+          A free, portable Windows app that moves your SAP Logon system list between
+          machines — folders, routers and logon groups intact — and backs it up to your cloud.
+        </p>
+
+        <div class="dl-buttons">
+          <a class="btn btn-primary btn-lg" href={downloadUrl}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+            Download .exe (Windows)
+          </a>
+          <a class="btn btn-ghost btn-lg" href="#build">Build it yourself</a>
+        </div>
+        <p class="dl-note muted">
+          Windows may show a SmartScreen warning for a new unsigned app — choose
+          <em>More info → Run anyway</em>. Prefer to verify the code first? See
+          <a href="#build">building from source</a>.
+        </p>
+      </div>
+
+      <aside class="dl-card">
+        <h2>Requirements</h2>
+        <ul class="req">
+          {requirements.map((r) => (
+            <li>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#107E3E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              <span>{r}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="req-safe">
+          <strong>Safe by design</strong>
+          <p class="muted">Only connection details are handled. SAP Logon never stores
+          passwords in these files, and neither does the tool.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section-tint" id="build">
+    <div class="wrap build-wrap">
+      <span class="eyebrow">For the cautious</span>
+      <h2>Build the .exe yourself</h2>
+      <p class="muted">Rather run your own build than trust a binary? The tool is plain Python.
+        On a Windows machine with Python installed:</p>
+
+      <ol class="build-steps">
+        <li>
+          <p>Install the build tools:</p>
+          <pre><code>pip install pyinstaller PySide6 openpyxl</code></pre>
+        </li>
+        <li>
+          <p>From the folder with the source files, build a single portable .exe:</p>
+          <pre><code>pyinstaller --onefile --windowed \
+  --name "SAP Logon Transfer" --icon=app.ico \
+  sap_logon_transfer_qt.py</code></pre>
+        </li>
+        <li>
+          <p>Your app lands in <code>dist\SAP Logon Transfer.exe</code>.</p>
+        </li>
+      </ol>
+      <p class="muted">A ready-made <code>build_small.bat</code> that trims unused Qt modules
+        ships with the source. Full walkthrough in the
+        <a href="/guides/install-sap-logon-transfer/">install guide</a>.</p>
+    </div>
+  </section>
+
+  <style>
+    .dl { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+    .dl-inner { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(1.5rem, 4vw, 3rem); align-items: start; }
+    .dl-main h1 { font-size: var(--step-3); }
+    .dl-main .lead { font-size: var(--step-1); max-width: 48ch; }
+    .dl-buttons { display: flex; gap: 0.8rem; margin: 1.8rem 0 1rem; flex-wrap: wrap; }
+    .btn-lg { padding: 0.9rem 1.6rem; font-size: var(--step-0); }
+    .dl-note { font-size: 0.9rem; max-width: 52ch; }
+
+    .dl-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem; }
+    .dl-card h2 { font-size: var(--step-1); margin-bottom: 1rem; }
+    .req { list-style: none; margin: 0 0 1.3rem; padding: 0; display: flex; flex-direction: column; gap: 0.7rem; }
+    .req li { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.95rem; }
+    .req li svg { flex: none; margin-top: 3px; }
+    .req-safe { border-top: 1px solid var(--line); padding-top: 1.1rem; }
+    .req-safe strong { color: var(--green); font-size: 0.95rem; }
+    .req-safe p { font-size: 0.9rem; margin: 0.3rem 0 0; }
+
+    .build-wrap { max-width: 760px; }
+    .build-wrap h2 { font-size: var(--step-2); }
+    .build-steps { padding-left: 0; list-style: none; counter-reset: b; margin-top: 1.5rem; }
+    .build-steps li { counter-increment: b; position: relative; padding-left: 2.6rem; margin-bottom: 1.5rem; }
+    .build-steps li::before {
+      content: counter(b, decimal-leading-zero); position: absolute; left: 0; top: 0;
+      font-family: var(--font-mono); font-size: 0.8rem; color: var(--blue);
+      border: 1px solid var(--line-strong); border-radius: 6px; padding: 0.15rem 0.45rem;
+    }
+    .build-steps p { margin-bottom: 0.5rem; }
+    pre { background: var(--ink); color: #D7E6F5; padding: 1rem 1.2rem; border-radius: var(--radius-sm); overflow-x: auto; font-size: 0.86rem; line-height: 1.6; }
+    pre code { background: none; border: none; color: inherit; padding: 0; }
+
+    @media (max-width: 760px) {
+      .dl-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</Base>

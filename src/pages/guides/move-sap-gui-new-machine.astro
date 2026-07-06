@@ -1,0 +1,70 @@
+---
+import Guide from '../../layouts/Guide.astro';
+---
+<Guide
+  title="How to move SAP GUI to a new computer (transfer your system list)"
+  description="Move your entire SAP Logon system list to a new PC or laptop without retyping connections. Carry folders, SAP routers and logon groups intact — the clean way, step by step."
+  keywords="move SAP GUI to new computer, transfer SAP Logon to new PC, copy SAP GUI settings, migrate SAP Logon, transfer SAP connections new laptop, export import SAP Logon"
+  path="/guides/move-sap-gui-new-machine/"
+  tag="How-to"
+  updated="February 2026"
+>
+  <p>
+    Getting a new laptop shouldn't mean rebuilding your SAP system list by hand. Your
+    whole landscape — every folder, server, router and logon group — already lives in one
+    file. Here's how to carry it across cleanly.
+  </p>
+
+  <h2>The manual way (and its catch)</h2>
+  <p>
+    In theory you can copy <code>%APPDATA%\SAP\Common\SAPUILandscape.xml</code> from the old
+    machine to the new one. That works when the new machine has <em>no</em> SAP systems yet.
+    But if it already has some, overwriting the file wipes them — and if you only want a few
+    folders, hand-editing the XML risks breaking the router and message-server references.
+  </p>
+
+  <h2>The clean way</h2>
+  <ol>
+    <li>
+      <strong>On the old machine:</strong> open <a href="/download/">SAP Logon Transfer</a>,
+      click <strong>Auto-detect → Load</strong>, tick the folders or systems you want, and
+      choose <strong>Export selected</strong>. The filename is prefixed by what you exported
+      (<code>all_…</code>, a folder name, or a single system's name).
+    </li>
+    <li>
+      <strong>Move the file</strong> to the new machine — USB, email, or your cloud folder.
+      (Or skip this step entirely and use <strong>Back up to cloud</strong> on the old
+      machine, then <strong>Restore from cloud</strong> on the new one.)
+    </li>
+    <li>
+      <strong>On the new machine:</strong> open the tool, load the exported file, tick what
+      you want, and choose <strong>Import to this machine</strong>. A preview shows which
+      systems are new (added) and which already exist (blocked, in red). A <code>.bak</code>
+      of the current config is written first.
+    </li>
+    <li>
+      <strong>Restart SAP Logon</strong> to see the systems appear.
+    </li>
+  </ol>
+
+  <blockquote>
+    Because the tool resolves router and message-server references, a load-balanced system
+    or one behind a SAP router keeps working on the new machine — not just the app-server
+    entries.
+  </blockquote>
+
+  <h2>Merging instead of replacing</h2>
+  <p>
+    If the new machine already has its own systems, you don't have to choose between them and
+    yours. Import merges: existing systems stay, new ones are added, and duplicates are
+    skipped rather than doubled. That makes this the same procedure you'd use to sync two
+    machines that should share a set of systems.
+  </p>
+
+  <h2>Keep a backup while you're at it</h2>
+  <p>
+    Once everything's on the new machine, use <strong>Back up to cloud</strong> to drop a
+    timestamped copy into OneDrive, Google Drive or Dropbox. Next time you switch machines,
+    restore is one click.
+  </p>
+</Guide>

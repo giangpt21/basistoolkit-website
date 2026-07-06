@@ -1,0 +1,81 @@
+---
+import Guide from '../../layouts/Guide.astro';
+---
+<Guide
+  title="How to install SAP GUI for Mac (SAP GUI for Java)"
+  description="How to get SAP GUI running on a Mac: what SAP GUI for Java is, the Java requirement, installation steps, and how connecting differs from SAP GUI for Windows."
+  keywords="SAP GUI for Mac, install SAP GUI Mac, SAP GUI for Java, SAP GUI macOS, SAP Logon Mac, connect to SAP from Mac"
+  path="/guides/install-sap-gui-mac/"
+  tag="How-to"
+  updated="February 2026"
+>
+  <p>
+    There's no "SAP GUI for Windows" on macOS — instead, Mac users run
+    <strong>SAP GUI for Java</strong>, a separate client that provides the same core
+    logon and transaction experience. This guide covers what it is, what you need, and
+    how to install it.
+  </p>
+
+  <h2>SAP GUI for Java vs SAP GUI for Windows</h2>
+  <p>
+    SAP ships two desktop clients: <strong>SAP GUI for Windows</strong> (Windows only)
+    and <strong>SAP GUI for Java</strong> (cross-platform — macOS, Linux and Windows).
+    On a Mac you use the Java edition. It connects to the same SAP systems and runs the
+    same transactions, though a few Windows-only features and some visual polish differ.
+  </p>
+  <blockquote>
+    The two clients also store their connection lists differently, so the
+    <code>SAPUILandscape.xml</code> file from a Windows machine is not directly
+    interchangeable with the Java client's configuration.
+  </blockquote>
+
+  <h2>What you need first: Java</h2>
+  <p>
+    SAP GUI for Java requires a Java runtime (JRE/JDK). SAP publishes the supported Java
+    versions for each SAP GUI for Java release in its release notes, so check which Java
+    version your SAP GUI for Java version needs, and install that first. On Apple Silicon
+    Macs (M1/M2/M3), make sure you use a Java build that matches — SAP's notes state which
+    architectures are supported.
+  </p>
+
+  <h2>Step 1 — Get the installer</h2>
+  <p>
+    Like the Windows client, SAP GUI for Java is licensed software. Download it from your
+    organisation's software portal, or from the SAP Software Download Center if you have
+    SAP customer credentials. You'll get a macOS package (typically a <code>.JAR</code>
+    installer or a <code>.dmg</code>, depending on the release).
+  </p>
+
+  <h2>Step 2 — Run the installer</h2>
+  <p>
+    Launch the downloaded installer and follow the prompts. Because it's a Java
+    application, the installer may run through Java rather than as a native <code>.app</code>.
+    If macOS blocks it as coming from an unidentified developer, allow it under
+    <em>System Settings → Privacy &amp; Security</em>.
+  </p>
+
+  <h2>Step 3 — Launch and add a connection</h2>
+  <p>
+    Open SAP GUI for Java. To add a system, open the connection manager and enter the
+    details your Basis team provides — application server or message server, system ID,
+    instance number, and a SAP router string if required. You can also paste a full
+    connection string. Save it and connect.
+  </p>
+
+  <h2>Alternatives on Mac</h2>
+  <p>
+    If SAP GUI for Java doesn't fit your workflow, two common alternatives are:
+  </p>
+  <ul>
+    <li><strong>SAP Fiori / web access</strong> — many modern SAP tasks are available through the browser, no desktop client needed.</li>
+    <li><strong>Windows in a VM or Remote Desktop</strong> — run SAP GUI for Windows inside a virtual machine (Parallels, VMware) or connect to a Windows session where SAP GUI is already installed.</li>
+  </ul>
+
+  <h2>A note on transferring your system list</h2>
+  <p>
+    Our tool, <a href="/download/">SAP Logon Transfer</a>, works with the
+    <strong>Windows</strong> client's <code>SAPUILandscape.xml</code>. If you move between
+    Windows machines it saves you a lot of retyping; on Mac, the Java client manages its
+    own configuration separately.
+  </p>
+</Guide>

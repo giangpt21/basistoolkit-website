@@ -1,0 +1,131 @@
+/* =========================================================================
+   BasisToolkit — design tokens & base styles
+   Audience: SAP Basis admins / consultants. Register: technical, precise,
+   trustworthy. Signature motif: file paths in mono + the two-node transfer.
+   ========================================================================= */
+
+:root {
+  /* palette */
+  --ink:        #0E1A2B;   /* primary text — deep blue-black */
+  --slate:      #55657A;   /* secondary text */
+  --slate-soft: #8896A8;   /* muted / captions */
+  --blue:       #0A6ED1;   /* SAP blue — primary accent */
+  --blue-dark:  #084B96;   /* hover / pressed */
+  --blue-tint:  #E7F1FC;   /* soft blue fill */
+  --amber:      #E9730C;   /* rare accent — matches the tool's transfer mark */
+  --green:      #107E3E;   /* success / "free" */
+  --paper:      #FBFCFE;   /* page background */
+  --surface:    #F2F6FA;   /* cards / alt sections */
+  --surface-2:  #EAF0F6;
+  --line:       #E1E9F1;   /* hairlines */
+  --line-strong:#CBD7E4;
+
+  /* type */
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", "Consolas", monospace;
+
+  /* scale */
+  --step--1: clamp(0.83rem, 0.8rem + 0.1vw, 0.9rem);
+  --step-0:  clamp(1rem, 0.96rem + 0.2vw, 1.06rem);
+  --step-1:  clamp(1.2rem, 1.1rem + 0.5vw, 1.4rem);
+  --step-2:  clamp(1.5rem, 1.3rem + 1vw, 1.95rem);
+  --step-3:  clamp(2rem, 1.6rem + 2vw, 3rem);
+  --step-4:  clamp(2.6rem, 2rem + 3.2vw, 4.4rem);
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --maxw: 1140px;
+  --gutter: clamp(1.2rem, 4vw, 2.4rem);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5em;
+  font-weight: 600;
+}
+
+a { color: var(--blue); text-decoration: none; }
+a:hover { color: var(--blue-dark); }
+
+p { margin: 0 0 1rem; }
+
+code, kbd, pre { font-family: var(--font-mono); }
+
+/* inline path/code — the signature texture */
+code:not(pre code) {
+  background: var(--surface-2);
+  color: var(--blue-dark);
+  padding: 0.12em 0.4em;
+  border-radius: 5px;
+  font-size: 0.88em;
+  border: 1px solid var(--line);
+}
+
+/* layout helpers */
+.wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue);
+  font-weight: 500;
+  margin: 0 0 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* buttons */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  font-weight: 600; font-size: var(--step-0);
+  padding: 0.72rem 1.4rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid transparent;
+  cursor: pointer; transition: background .15s, border-color .15s, transform .05s;
+  font-family: var(--font-body);
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--blue); color: #fff; }
+.btn-primary:hover { background: var(--blue-dark); color: #fff; }
+.btn-ghost { background: #fff; color: var(--blue); border-color: var(--line-strong); }
+.btn-ghost:hover { background: var(--blue-tint); border-color: var(--blue); color: var(--blue-dark); }
+
+/* focus visibility */
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 3px; }
+
+/* section rhythm */
+.section { padding-block: clamp(3.5rem, 8vw, 6rem); }
+.section-tint { background: var(--surface); border-block: 1px solid var(--line); }
+
+/* small utility */
+.muted { color: var(--slate); }
+.center { text-align: center; }

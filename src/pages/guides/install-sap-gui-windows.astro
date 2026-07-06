@@ -1,0 +1,89 @@
+---
+import Guide from '../../layouts/Guide.astro';
+---
+<Guide
+  title="How to install SAP GUI on Windows (step by step)"
+  description="A clear, step-by-step guide to installing SAP GUI for Windows: where to get the installer, how to run it, what components to pick, and how to add your first system afterwards."
+  keywords="install SAP GUI Windows, SAP GUI installation, download SAP GUI, SAP GUI for Windows setup, SAP GUI 8.0 install, how to install SAP Logon"
+  path="/guides/install-sap-gui-windows/"
+  tag="How-to"
+  updated="February 2026"
+>
+  <p>
+    SAP GUI (also called SAP Logon) is the desktop client you use to connect to SAP
+    systems. This guide walks through a clean installation on Windows, what to choose
+    during setup, and how to add your first connection.
+  </p>
+
+  <h2>Before you start</h2>
+  <p>
+    SAP GUI is licensed software distributed by SAP. You normally get the installer
+    from your own organisation — typically from a shared drive, a software portal, or
+    your Basis/IT team — because it requires SAP credentials to download from SAP's
+    own site. If you're a customer, the installer is on the SAP Software Download
+    Center; if you're an employee, ask your IT department for the approved package.
+  </p>
+  <blockquote>
+    Only install SAP GUI from your organisation's official source. Avoid third-party
+    "download SAP GUI free" sites — they are not authorised and may bundle unwanted
+    software.
+  </blockquote>
+
+  <h2>Which version?</h2>
+  <p>
+    The current family is <strong>SAP GUI for Windows 8.0</strong>, with 7.70 still
+    widely used. Newer versions store your system list in <code>SAPUILandscape.xml</code>
+    (SAP GUI 7.10 and later), which is what makes it easy to back up and move — see our
+    guide on <a href="/guides/what-is-sapuilandscape-xml/">where SAPUILandscape.xml lives</a>.
+  </p>
+
+  <h2>Step 1 — Run the installer</h2>
+  <p>
+    Extract the installer package if it came as an archive, then run
+    <code>SetupAll.exe</code> (or <code>NwSapSetup.exe</code>). You'll usually need
+    local administrator rights. If your organisation provides a pre-configured package,
+    just run it and follow the prompts.
+  </p>
+
+  <h2>Step 2 — Choose components</h2>
+  <p>
+    The setup lets you pick components. For most users the defaults are fine. The key
+    one is <strong>SAP GUI for Windows</strong> itself. You may also see options for:
+  </p>
+  <ul>
+    <li><strong>SAP GUI</strong> — the core client (required).</li>
+    <li><strong>Business Explorer (BW)</strong> — only if you work with SAP BW / BEx.</li>
+    <li><strong>SAP GUI scripting</strong> — enable if you automate the GUI; otherwise skip.</li>
+  </ul>
+  <p>Pick what you need and continue. The installer copies files and finishes.</p>
+
+  <h2>Step 3 — Launch SAP Logon</h2>
+  <p>
+    After installation, open <strong>SAP Logon</strong> from the Start menu. The first
+    time, your system list will be empty — that's expected on a fresh install.
+  </p>
+
+  <h2>Step 4 — Add your first system</h2>
+  <p>
+    Click <strong>New</strong> (or the "+" / "Add New Entry" button), then enter the
+    connection details your Basis team gives you: application server or message server,
+    system ID (SID), instance number, and (if needed) a SAP router string. Save it, and
+    double-click to connect. For a full walkthrough see
+    <a href="/guides/add-system-to-sap-logon/">adding a system to SAP Logon manually</a>.
+  </p>
+
+  <h2>Moving to a new PC later?</h2>
+  <p>
+    Once your system list is set up, you don't have to rebuild it by hand on your next
+    machine. Export it and import it with <a href="/download/">SAP Logon Transfer</a> —
+    folders, routers and logon groups come along, and no passwords are involved. See
+    <a href="/guides/move-sap-gui-new-machine/">moving SAP GUI to a new computer</a>.
+  </p>
+
+  <h2>Common issues</h2>
+  <ul>
+    <li><strong>"You do not have permission"</strong> — run the installer as administrator.</li>
+    <li><strong>Old version won't upgrade</strong> — uninstall the previous SAP GUI first, then install the new one.</li>
+    <li><strong>Systems missing after reinstall</strong> — you likely didn't keep <code>SAPUILandscape.xml</code>. Back it up next time; see <a href="/guides/backup-sap-gui-settings/">backing up SAP GUI settings</a>.</li>
+  </ul>
+</Guide>

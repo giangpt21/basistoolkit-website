@@ -1,0 +1,73 @@
+---
+import Guide from '../../layouts/Guide.astro';
+---
+<Guide
+  title="Back up your SAP GUI settings before reinstalling Windows"
+  description="Reinstalling Windows or getting a new PC wipes your SAP Logon system list. Here's exactly which file to save, where it is, and how to restore your systems afterwards."
+  keywords="backup SAP GUI settings, save SAP Logon before reinstall Windows, backup SAPUILandscape.xml, restore SAP Logon systems, SAP GUI backup connections"
+  path="/guides/backup-sap-gui-settings/"
+  tag="How-to"
+  updated="February 2026"
+>
+  <p>
+    Wiping Windows or moving to a new PC will erase your SAP Logon system list unless you
+    save it first. The good news: it's all in one small file. Back that up and you can
+    restore every system in seconds.
+  </p>
+
+  <h2>The one file you need</h2>
+  <p>
+    SAP GUI 7.10 and later keep your entire system list in
+    <code>SAPUILandscape.xml</code>, stored here:
+  </p>
+  <pre><code>%APPDATA%\SAP\Common\SAPUILandscape.xml</code></pre>
+  <p>
+    Paste that path into the File Explorer address bar to jump straight to the folder.
+    Copy <code>SAPUILandscape.xml</code> somewhere safe — a USB stick, cloud folder, or
+    another drive. That single file holds your folders, servers, routers and logon groups.
+  </p>
+  <blockquote>
+    There are no passwords in this file — it only stores where to connect, not how to
+    authenticate. That's why it's safe to copy and keep.
+  </blockquote>
+
+  <h2>Also check for a global file</h2>
+  <p>
+    If your organisation pushes a shared configuration, there may also be
+    <code>SAPUILandscapeGlobal.xml</code>. In most cases you only need your personal
+    <code>SAPUILandscape.xml</code>; back up the global one too if you maintain it.
+  </p>
+
+  <h2>Restoring after reinstall</h2>
+  <p>You have two ways to restore, depending on the situation:</p>
+
+  <h3>If the new machine has no systems yet</h3>
+  <p>
+    Install SAP GUI, close SAP Logon, then copy your saved
+    <code>SAPUILandscape.xml</code> back into <code>%APPDATA%\SAP\Common\</code>,
+    overwriting the empty one. Reopen SAP Logon and everything is back.
+  </p>
+
+  <h3>If the new machine already has some systems</h3>
+  <p>
+    Don't overwrite — you'd wipe the systems already there. Instead, use
+    <a href="/download/">SAP Logon Transfer</a> to <strong>import</strong> your saved file:
+    it merges the two lists, adds only what's new, blocks duplicates, and writes a backup
+    first. See <a href="/guides/move-sap-gui-new-machine/">moving SAP GUI to a new computer</a>.
+  </p>
+
+  <h2>Make it a habit</h2>
+  <p>
+    Rather than remembering to copy the file manually, you can push a timestamped backup
+    to your OneDrive, Google Drive or Dropbox folder with SAP Logon Transfer's cloud
+    backup. Next reinstall, restore is one click — no hunting for the file.
+  </p>
+
+  <h2>Quick checklist</h2>
+  <ul>
+    <li>Copy <code>%APPDATA%\SAP\Common\SAPUILandscape.xml</code> before wiping Windows.</li>
+    <li>Store it somewhere off the machine (USB, cloud, another drive).</li>
+    <li>Restore by copying it back (empty target) or importing it (existing systems).</li>
+    <li>No passwords are involved, so the backup is safe to keep.</li>
+  </ul>
+</Guide>

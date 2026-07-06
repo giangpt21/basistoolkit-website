@@ -1,0 +1,66 @@
+---
+import Guide from '../../layouts/Guide.astro';
+---
+<Guide
+  title="Where is SAPUILandscape.xml? Location and contents explained"
+  description="Where Windows stores SAPUILandscape.xml (the SAP GUI 7.10+ system list), what's inside it — folders, services, routers, message servers — and how to edit it safely."
+  keywords="SAPUILandscape.xml, SAPUILandscape.xml location, where is SAPUILandscape.xml, SAP GUI system list file, SAP Logon config file, SAPUILandscapeGlobal.xml, saplogon.ini"
+  path="/guides/what-is-sapuilandscape-xml/"
+  tag="Reference"
+  updated="February 2026"
+>
+  <p>
+    Since SAP GUI 7.10, your list of SAP systems lives in a single XML file called
+    <code>SAPUILandscape.xml</code>. If you've ever set up SAP GUI on a fresh machine
+    and retyped every connection by hand, this is the file you actually needed to copy.
+  </p>
+
+  <h2>Where Windows keeps it</h2>
+  <p>The per-user file is here:</p>
+  <pre><code>%APPDATA%\SAP\Common\SAPUILandscape.xml</code></pre>
+  <p>
+    There may also be a global file, <code>SAPUILandscapeGlobal.xml</code>, pushed by an
+    administrator. Older SAP GUI versions used <code>saplogon.ini</code> instead — a flat
+    list with no folders.
+  </p>
+
+  <h2>What's inside</h2>
+  <p>The file has a few distinct sections that reference each other by UUID:</p>
+  <ul>
+    <li><strong>Workspaces / Nodes</strong> — your folder tree. Nodes can nest to any depth.</li>
+    <li><strong>Items</strong> — each system as it appears in a folder; points to a Service.</li>
+    <li><strong>Services</strong> — the actual connection details: system ID, server, connection type.</li>
+    <li><strong>Routers</strong> — SAP router strings, referenced by services that need them.</li>
+    <li><strong>Messageservers</strong> — message servers for group/load-balanced logons.</li>
+  </ul>
+
+  <p>
+    The important consequence: a single connection isn't just one line. A load-balanced
+    system points at a message server; a system behind a router points at a router string.
+    Copy only the <em>Service</em> and you lose those links — the connection breaks on the
+    new machine.
+  </p>
+
+  <blockquote>
+    This is exactly why copying the file by hand can go wrong when you only want part of it.
+    SAP Logon Transfer resolves these references for you, so an exported folder brings its
+    routers and message servers along.
+  </blockquote>
+
+  <h2>What is <em>not</em> in it</h2>
+  <p>
+    No passwords. SAP Logon does not store user credentials in this file — they're entered
+    at logon time. That's why moving or backing up this file is safe: it carries where to
+    connect, never how to authenticate.
+  </p>
+
+  <h2>Editing it safely</h2>
+  <p>
+    You can open the file in any text editor to inspect it, but hand-editing risks breaking
+    the UUID references. Safer options:
+  </p>
+  <ul>
+    <li>Use SAP Logon's own interface to add or change systems.</li>
+    <li>Use <a href="/download/">SAP Logon Transfer</a> to move or back up parts of it — it writes a <code>.bak</code> before every change and blocks duplicate imports.</li>
+  </ul>
+</Guide>

@@ -1,0 +1,74 @@
+---
+import Guide from '../../layouts/Guide.astro';
+---
+<Guide
+  title="How to add a system to SAP Logon manually"
+  description="Step-by-step: add a new SAP system to SAP Logon by hand — custom application server or group/message server logon — and the exact fields you need from your Basis team."
+  keywords="add system to SAP Logon, add SAP system manually, new entry SAP Logon, SAP Logon add server, configure SAP connection, SAP Logon new connection"
+  path="/guides/add-system-to-sap-logon/"
+  tag="How-to"
+  updated="February 2026"
+>
+  <p>
+    Adding a system to SAP Logon by hand is quick once you know which fields matter. This
+    guide covers both connection types — a specific application server, and a
+    load-balanced group logon via a message server.
+  </p>
+
+  <h2>What you need from your Basis team</h2>
+  <p>Before you start, get these details for the system:</p>
+  <ul>
+    <li><strong>System ID (SID)</strong> — a three-character code, e.g. PRD.</li>
+    <li><strong>Application server</strong> host name or IP (for a direct connection), or the <strong>message server</strong> and <strong>logon group</strong> (for load balancing).</li>
+    <li><strong>Instance number</strong> — two digits, e.g. 00.</li>
+    <li><strong>SAP router string</strong> — only if the system sits behind a saprouter.</li>
+  </ul>
+
+  <h2>Step 1 — Start a new entry</h2>
+  <p>
+    Open SAP Logon and click <strong>New</strong> (the "+" or "Add New Entry" button). A
+    wizard opens asking for the connection type.
+  </p>
+
+  <h2>Step 2a — Custom application server</h2>
+  <p>Choose this to connect directly to one server. Enter:</p>
+  <ul>
+    <li><strong>Description</strong> — a friendly name that will show in your list.</li>
+    <li><strong>Application Server</strong> — the host name or IP.</li>
+    <li><strong>Instance Number</strong> — e.g. 00.</li>
+    <li><strong>System ID</strong> — the SID.</li>
+  </ul>
+  <p>Add the router string in the connection field if required, then finish.</p>
+
+  <h2>Step 2b — Group/server selection (load balancing)</h2>
+  <p>Choose this for a load-balanced system that spreads users across servers. Enter:</p>
+  <ul>
+    <li><strong>System ID</strong> — the SID.</li>
+    <li><strong>Message Server</strong> — the host name (and port, if asked).</li>
+    <li><strong>Logon Group</strong> — e.g. PUBLIC or SPACE.</li>
+  </ul>
+  <p>
+    The message server then routes you to whichever application server is least busy.
+  </p>
+
+  <h2>Step 3 — Organise with folders</h2>
+  <p>
+    Drag the new entry into a folder to keep your list tidy — for example by landscape
+    (Production, Quality, Development) or by project. Folders are preserved when you later
+    move your list to another machine.
+  </p>
+
+  <h2>Step 4 — Connect</h2>
+  <p>
+    Double-click the entry. On first logon you'll enter your client, user and password —
+    these are never stored in the system list itself, only entered at logon time.
+  </p>
+
+  <h2>Doing this on many machines?</h2>
+  <p>
+    If you find yourself adding the same systems on machine after machine, set them up
+    once and move the whole list with <a href="/download/">SAP Logon Transfer</a> instead
+    — folders, message servers and routers included, no retyping. See
+    <a href="/guides/move-sap-gui-new-machine/">moving SAP GUI to a new computer</a>.
+  </p>
+</Guide>

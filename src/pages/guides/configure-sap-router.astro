@@ -1,0 +1,71 @@
+---
+import Guide from '../../layouts/Guide.astro';
+---
+<Guide
+  title="How to configure a SAP router string in SAP Logon"
+  description="What a SAP router string is, how to read it, and how to add one to a connection in SAP Logon so you can reach systems behind a saprouter. With a clear example."
+  keywords="SAP router string, configure saprouter SAP Logon, SAP router SAP GUI, how to add router string, saprouter connection, SAP Logon router"
+  path="/guides/configure-sap-router/"
+  tag="How-to"
+  updated="February 2026"
+>
+  <p>
+    Many SAP systems sit behind a <strong>saprouter</strong> — a gateway that controls
+    access between networks. To reach them from SAP GUI you add a <strong>router
+    string</strong> to the connection. This guide explains the format and how to set it up.
+  </p>
+
+  <h2>What a router string looks like</h2>
+  <p>
+    A router string is a chain of hops, each in the form
+    <code>/H/host/S/service</code>, where <code>/H/</code> introduces a host and
+    <code>/S/</code> an optional port. A single-hop example:
+  </p>
+  <pre><code>/H/saprouter.example.com/S/3299</code></pre>
+  <p>
+    <code>3299</code> is the standard saprouter port. If traffic passes through more than
+    one router, the hops are chained left to right, ending at the target system. The
+    application server itself is then reached at its own host and port.
+  </p>
+
+  <h2>Step 1 — Open the connection properties</h2>
+  <p>
+    In SAP Logon, select the system entry and open its properties (right-click →
+    <em>Properties</em>, or edit it when creating a new entry). Go to the
+    <strong>Connection</strong> tab.
+  </p>
+
+  <h2>Step 2 — Enter the router string</h2>
+  <p>
+    There's a field for the <strong>SAP router string</strong>. Paste the string your
+    Basis team gave you. SAP GUI combines it with the application-server (or message-server)
+    details you enter, so the client knows to tunnel through the router to reach the system.
+  </p>
+  <blockquote>
+    Get the exact router string from your Basis or network team — the host names, ports
+    and order all matter. A single wrong character means the connection won't establish.
+  </blockquote>
+
+  <h2>Step 3 — Save and test</h2>
+  <p>
+    Save the entry and double-click to connect. If it fails, check the router string for
+    typos, confirm the saprouter is reachable from your network, and verify the port
+    (usually 3299) isn't blocked by a firewall.
+  </p>
+
+  <h2>Why the router matters when you move machines</h2>
+  <p>
+    When you copy your system list to another PC, systems behind a router only work if
+    the router string travels with them. Copying just the raw entry can lose that link.
+    <a href="/download/">SAP Logon Transfer</a> resolves and carries router references
+    automatically, so a system that needs a saprouter keeps working on the new machine —
+    see <a href="/guides/move-sap-gui-new-machine/">moving SAP GUI to a new computer</a>.
+  </p>
+
+  <h2>Troubleshooting</h2>
+  <ul>
+    <li><strong>"partner not reached"</strong> — the saprouter host/port may be wrong or blocked; confirm with your network team.</li>
+    <li><strong>Connection works for colleagues but not you</strong> — your machine may not have network access to the saprouter, or you're missing VPN.</li>
+    <li><strong>Router string disappears after moving PC</strong> — the reference wasn't carried; re-add it or use a tool that preserves router links.</li>
+  </ul>
+</Guide>
