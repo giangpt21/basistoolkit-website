@@ -52,7 +52,7 @@ const year = new Date().getFullYear();
       rel="stylesheet"
     />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
@@ -61,11 +61,7 @@ const year = new Date().getFullYear();
       <div class="wrap header-inner">
         <a class="brand" href="/" aria-label="BasisToolkit home">
           <span class="brand-mark" aria-hidden="true">
-            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-              <rect x="1" y="6" width="9" height="14" rx="2" fill="#0A6ED1"/>
-              <rect x="16" y="6" width="9" height="14" rx="2" fill="#0A6ED1" opacity="0.55"/>
-              <path d="M11 11.5h3.2v-1.6l2.6 2.1-2.6 2.1v-1.6H11z" fill="#E9730C"/>
-            </svg>
+            <img src="/logo.png" width="26" height="26" alt="" />
           </span>
           <span class="brand-name">Basis<span class="brand-name-accent">Toolkit</span></span>
         </a>
@@ -100,12 +96,11 @@ const year = new Date().getFullYear();
           <div>
             <h4>Learn</h4>
             <a href="/guides/">All guides</a>
-            <a href="/guides/install-sap-logon-transfer/">Install guide</a>
-            <a href="/guides/what-is-sapuilandscape-xml/">SAPUILandscape.xml</a>
+            <a href="/guides/move-sap-gui-new-machine/">Move to a new PC</a>
+            <a href="/guides/backup-sap-gui-settings/">Back up your settings</a>
           </div>
           <div>
             <h4>Contact</h4>
-            <a href="mailto:giangpt@outlook.com">giangpt@outlook.com</a>
             <a href="/about/">About the author</a>
           </div>
         </nav>
@@ -113,6 +108,10 @@ const year = new Date().getFullYear();
       <div class="wrap footer-legal">
         <p class="muted">© {year} BasisToolkit · Freeware · Built by Giang Phạm.
           Not affiliated with or endorsed by SAP SE. “SAP” is a trademark of SAP SE.</p>
+        <nav class="footer-legal-links" aria-label="Legal">
+          <a href="/privacy/">Privacy Policy</a>
+          <a href="/terms/">Terms of Use</a>
+        </nav>
       </div>
     </footer>
 
@@ -175,8 +174,11 @@ const year = new Date().getFullYear();
       }
       .footer-cols a { display: block; color: #C4D2E2; font-size: 0.92rem; margin-bottom: 0.5rem; }
       .footer-cols a:hover { color: #fff; }
-      .footer-legal { padding-bottom: 2rem; }
+      .footer-legal { padding-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
       .footer-legal .muted { color: #7F92A6; font-size: 0.82rem; }
+      .footer-legal-links { display: flex; gap: 1.2rem; flex: none; }
+      .footer-legal-links a { color: #9FB3C7; font-size: 0.82rem; }
+      .footer-legal-links a:hover { color: #fff; }
       @media (max-width: 760px) {
         .footer-inner { grid-template-columns: 1fr; gap: 1.8rem; }
         .footer-cols { grid-template-columns: repeat(2, 1fr); }

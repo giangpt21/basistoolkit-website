@@ -18,13 +18,13 @@ const features = [
     icon: 'link',
   },
   {
-    title: 'Backs up to your cloud',
-    body: 'Save a timestamped copy straight into your OneDrive, Google Drive or Dropbox folder. Restore it on any machine.',
+    title: 'Share and back up any connections',
+    body: 'Export your whole configuration or just part of it, so you can share exactly the systems a colleague needs — or keep a backup in your OneDrive, Google Drive or Dropbox folder.',
     icon: 'cloud',
   },
   {
-    title: 'Six languages',
-    body: 'English, Tiếng Việt, 日本語, Français, Deutsch, 简体中文 — switch from the menu, the whole UI follows.',
+    title: 'Seven languages',
+    body: 'English, 日本語, Français, Deutsch, 简体中文, ไทย and Tiếng Việt — switch from the menu, the whole UI follows.',
     icon: 'globe',
   },
   {
@@ -35,16 +35,16 @@ const features = [
 ];
 
 const steps = [
-  { n: '01', t: 'Load your config', d: 'Auto-detect finds SAPUILandscape.xml in %APPDATA%\\SAP\\Common, or point it at any file.' },
+  { n: '01', t: 'Load your config', d: 'Auto-detect finds the SAP connections on your computer, or point it at any file you exported.' },
   { n: '02', t: 'Pick what to move', d: 'Tick whole folders or single systems. Search filters hundreds of entries in a keystroke.' },
   { n: '03', t: 'Export or back up', d: 'Write a file to share, or push a backup to your cloud folder. Filenames are named for what you exported.' },
   { n: '04', t: 'Import on the other machine', d: 'Preview shows new vs. duplicate, a .bak is written first, then only the new systems are added.' },
 ];
 
 const guides = [
-  { t: 'Install SAP Logon Transfer', d: 'Download, run, and — if you want — build the single-file .exe yourself.', href: '/guides/install-sap-logon-transfer/', tag: 'Getting started' },
-  { t: 'Where is SAPUILandscape.xml?', d: 'What the file is, where Windows keeps it, and how its folders and services fit together.', href: '/guides/what-is-sapuilandscape-xml/', tag: 'Reference' },
-  { t: 'Move SAP GUI to a new machine', d: 'The clean way to carry your whole system list to a replacement laptop.', href: '/guides/move-sap-gui-new-machine/', tag: 'How-to' },
+  { t: 'How to move SAP GUI to a new computer', d: 'Carry your whole system list to a replacement laptop without retyping a single connection.', href: '/guides/move-sap-gui-new-machine/', tag: 'How-to' },
+  { t: 'How to install SAP GUI on Windows', d: 'Step-by-step install: getting the installer, choosing components, and adding your first system.', href: '/guides/install-sap-gui-windows/', tag: 'How-to' },
+  { t: 'Back up SAP GUI settings before reinstalling Windows', d: 'Save your connections so you can restore them in seconds after a wipe or new PC.', href: '/guides/backup-sap-gui-settings/', tag: 'How-to' },
 ];
 
 function icon(name) {
@@ -66,8 +66,8 @@ const faqs = [
     a: "Export your system list from the old machine with SAP Logon Transfer, copy the file across (or use cloud backup), then import it on the new machine. Folders, routers and logon groups are carried over, and you never retype a connection.",
   },
   {
-    q: "Where is the SAP Logon configuration file stored?",
-    a: "SAP GUI 7.10 and later store your system list in SAPUILandscape.xml, located at %APPDATA%\\SAP\\Common\\SAPUILandscape.xml. Older versions used saplogon.ini.",
+    q: "Can I share only some of my connections, not all of them?",
+    a: "Yes. You can export your whole configuration or just selected folders and systems, so you share exactly the connections a colleague needs — nothing more.",
   },
   {
     q: "Does SAP Logon Transfer copy passwords?",
@@ -119,7 +119,7 @@ const jsonLd = {
   <section class="hero">
     <div class="wrap hero-inner">
       <div class="hero-copy">
-        <span class="eyebrow">Freeware for SAP Basis</span>
+        <span class="eyebrow">Freeware for SAP Consultant</span>
         <h1>Move your SAP&nbsp;Logon setup<br />between machines — cleanly.</h1>
         <p class="hero-lead">
           BasisToolkit's SAP Logon Transfer copies your system list from one PC to another
@@ -132,7 +132,7 @@ const jsonLd = {
           </a>
           <a class="btn btn-ghost" href="/guides/install-sap-logon-transfer/">Read the install guide</a>
         </div>
-        <p class="hero-path"><span>reads</span> <code>%APPDATA%\SAP\Common\SAPUILandscape.xml</code></p>
+        <p class="hero-path"><span>auto-detects</span> <code>your SAP connections</code></p>
       </div>
 
       <!-- signature visual: two SAP Logon windows + transfer, anonymized sample data -->
@@ -144,16 +144,6 @@ const jsonLd = {
     </div>
   </section>
 
-  <!-- TRUST STRIP -->
-  <section class="strip">
-    <div class="wrap strip-inner">
-      <div><b>Free</b><span>no licence, no ads in-app</span></div>
-      <div><b>190+ systems</b><span>tested on real Basis landscapes</span></div>
-      <div><b>6 languages</b><span>EN · VI · JA · DE · ZH · FR</span></div>
-      <div><b>Windows</b><span>single portable .exe</span></div>
-    </div>
-  </section>
-
   <!-- TOOL / FEATURES -->
   <section class="section" id="tool">
     <div class="wrap">
@@ -162,9 +152,9 @@ const jsonLd = {
       <p class="sec-sub muted">Every SAP Logon export tool copies a file. This one understands what's inside it.</p>
 
       <div class="feature-grid">
-        {features.map((f) => (
+        {features.map((f, i) => (
           <article class="feature">
-            <span class="feature-icon" aria-hidden="true">
+            <span class={`feature-icon ${i % 3 === 1 ? 'accent-amber' : ''}`} aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" set:html={icon(f.icon)} />
             </span>
             <h3>{f.title}</h3>
@@ -254,15 +244,15 @@ const jsonLd = {
         radial-gradient(120% 90% at 85% 0%, var(--blue-tint) 0%, transparent 55%),
         var(--paper);
     }
-    .hero-inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
-    .hero-copy h1 { font-size: var(--step-4); font-weight: 700; }
-    .hero-lead { font-size: var(--step-1); color: var(--slate); max-width: 46ch; margin-top: 1rem; }
+    .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 3rem); align-items: center; }
+    .hero-copy h1 { font-size: var(--step-3); font-weight: 700; }
+    .hero-lead { font-size: var(--step-0); color: var(--slate); max-width: 46ch; margin-top: 1rem; }
     .hero-actions { display: flex; gap: 0.8rem; margin-top: 1.8rem; flex-wrap: wrap; }
     .hero-path { margin-top: 1.6rem; font-size: var(--step--1); color: var(--slate-soft); display: flex; align-items: center; gap: 0.5rem; }
     .hero-path span { font-family: var(--font-mono); }
 
     /* signature visual */
-    .hero-visual { position: relative; display: flex; align-items: flex-start; justify-content: center; padding-top: 2.5rem; }
+    .hero-visual { position: relative; display: flex; align-items: center; justify-content: center; }
     .hero-shot {
       width: 100%; height: auto; max-width: 620px; display: block;
       border-radius: 12px;
@@ -282,15 +272,16 @@ const jsonLd = {
     /* FEATURES */
     .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
     .feature { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem; transition: border-color .15s, transform .15s; }
-    .feature:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+    .feature:hover { border-color: var(--blue); transform: translateY(-2px); box-shadow: 0 12px 28px -18px rgba(10,110,209,0.4); }
     .feature-icon { display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 10px; background: var(--blue-tint); color: var(--blue); margin-bottom: 0.9rem; }
+    .feature-icon.accent-amber { background: #FDECD8; color: var(--amber); }
     .feature h3 { font-size: var(--step-1); margin-bottom: 0.35rem; }
     .feature p { margin: 0; font-size: 0.96rem; }
 
     /* STEPS */
     .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem 2.5rem; counter-reset: none; }
     .step { display: flex; gap: 1rem; align-items: flex-start; }
-    .step-n { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500; color: var(--blue); border: 1px solid var(--line-strong); border-radius: 6px; padding: 0.2rem 0.5rem; flex: none; margin-top: 0.2rem; }
+    .step-n { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; color: #fff; background: var(--blue); border-radius: 8px; padding: 0.25rem 0.55rem; flex: none; margin-top: 0.2rem; box-shadow: 0 4px 10px -4px rgba(10,110,209,0.5); }
     .step h3 { font-size: var(--step-1); margin-bottom: 0.2rem; }
     .step p { margin: 0; font-size: 0.96rem; }
 

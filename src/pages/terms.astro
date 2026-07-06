@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+const updated = 'February 2026';
+---
+<Base
+  title="Terms of Use | BasisToolkit"
+  description="Terms of Use for basistoolkit.com and the SAP Logon Transfer software — licence, disclaimer of warranty, and acceptable use."
+  path="/terms/"
+>
+  <section class="legal">
+    <div class="wrap legal-wrap">
+      <span class="eyebrow">Legal</span>
+      <h1>Terms of Use</h1>
+      <p class="muted updated">Last updated: {updated}</p>
+
+      <p>
+        By using <strong>basistoolkit.com</strong> and the software offered here, you agree to
+        these Terms of Use. If you do not agree, please do not use the site or the software.
+      </p>
+
+      <h2>The software is free</h2>
+      <p>
+        SAP Logon Transfer is provided free of charge as freeware. You may download, use and
+        share it for personal and professional purposes. The software is distributed under the
+        MIT License; the licence text is included with the download.
+      </p>
+
+      <h2>No warranty</h2>
+      <p>
+        The software and the information on this site are provided "as is", without warranty of
+        any kind, express or implied, including but not limited to the warranties of
+        merchantability, fitness for a particular purpose and non-infringement. You use the
+        software at your own risk.
+      </p>
+      <p>
+        Although the tool writes a backup before making changes and does not handle passwords,
+        you are responsible for keeping your own backups of important configuration. In no event
+        shall the author be liable for any claim, damages or other liability arising from the
+        use of the software.
+      </p>
+
+      <h2>Acceptable use</h2>
+      <p>
+        You agree to use this site and software lawfully. You may not attempt to disrupt the
+        site, misuse it to distribute malware, or represent the software as your own commercial
+        product.
+      </p>
+
+      <h2>Trademarks</h2>
+      <p>
+        BasisToolkit is an independent project. It is not affiliated with, authorised by, or
+        endorsed by SAP SE. "SAP" and other SAP product names are trademarks of SAP SE and are
+        used here only for descriptive, referential purposes.
+      </p>
+
+      <h2>Third-party services</h2>
+      <p>
+        Downloads may be hosted on third-party platforms (such as SourceForge), and the site may
+        display third-party advertising. Your use of those services is subject to their own
+        terms and policies.
+      </p>
+
+      <h2>Changes to these terms</h2>
+      <p>
+        We may update these Terms from time to time. Continued use of the site after changes
+        are posted constitutes acceptance of the updated Terms.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about these Terms can be directed through the
+        <a href="/about/">About page</a>.
+      </p>
+    </div>
+  </section>
+
+  <style>
+    .legal-wrap { max-width: 760px; padding-block: clamp(2.5rem, 6vw, 4rem); }
+    .legal h1 { font-size: var(--step-3); }
+    .legal .updated { margin-top: -0.5rem; margin-bottom: 2rem; font-size: 0.9rem; }
+    .legal h2 { font-size: var(--step-1); margin-top: 2rem; margin-bottom: 0.6rem; }
+    .legal p, .legal li { color: var(--slate); line-height: 1.7; }
+  </style>
+</Base>

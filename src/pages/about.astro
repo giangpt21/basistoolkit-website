@@ -1,20 +1,36 @@
 ---
 import Base from '../layouts/Base.astro';
+
+// ⬇️ THAY URL LINKEDIN của bạn vào đây
+const linkedinUrl = 'https://www.linkedin.com/in/giangpt/';
 ---
 <Base
   title="About BasisToolkit"
-  description="BasisToolkit builds free, focused utilities for SAP Basis administrators and consultants. Made by Giang Phạm, a working SAP consultant."
+  description="BasisToolkit builds free, focused utilities for SAP Basis administrators and consultants. Made by Giang Phạm, a working SAP Basis Consultant."
   path="/about/"
 >
   <section class="about">
     <div class="wrap about-wrap">
-      <span class="eyebrow">About</span>
-      <h1>Tools by someone who does this work.</h1>
-      <p class="lead">
-        BasisToolkit exists because the small, repetitive parts of SAP Basis work
-        deserve better tools than a manual file copy. It's built and maintained by
-        Giang Phạm, an SAP technical consultant.
-      </p>
+      <div class="about-head">
+        <div class="about-intro">
+          <span class="eyebrow">About</span>
+          <h1>Tools by someone who does this work.</h1>
+          <p class="lead">
+            BasisToolkit exists because the small, repetitive parts of SAP Basis work
+            deserve better tools than a manual file copy. It's built and maintained by
+            Giang Phạm, an SAP Basis Consultant.
+          </p>
+          <a class="linkedin" href={linkedinUrl} target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+            </svg>
+            <span>Connect on LinkedIn</span>
+          </a>
+        </div>
+        <div class="about-photo">
+          <img src="/author.png" alt="Giang Phạm, SAP Basis Consultant" />
+        </div>
+      </div>
 
       <div class="about-grid">
         <div>
@@ -36,15 +52,6 @@ import Base from '../layouts/Base.astro';
         </div>
       </div>
 
-      <div class="contact-card">
-        <div>
-          <h2>Get in touch</h2>
-          <p class="muted">Bug reports, feature ideas, or just to say a tool helped —
-            email is the fastest way.</p>
-        </div>
-        <a class="btn btn-primary" href="mailto:giangpt@outlook.com">giangpt@outlook.com</a>
-      </div>
-
       <p class="disclaimer muted">
         BasisToolkit is an independent project. It is not affiliated with, authorised by,
         or endorsed by SAP SE. “SAP” and other SAP product names are trademarks of SAP SE.
@@ -53,17 +60,30 @@ import Base from '../layouts/Base.astro';
   </section>
 
   <style>
-    .about-wrap { max-width: 820px; padding-block: clamp(2.5rem, 6vw, 4rem); }
+    .about-wrap { max-width: 900px; padding-block: clamp(2.5rem, 6vw, 4rem); }
+    .about-head { display: grid; grid-template-columns: 1.6fr 1fr; gap: 2.5rem; align-items: center; margin-bottom: 1rem; }
     .about h1 { font-size: var(--step-3); }
     .about .lead { font-size: var(--step-1); color: var(--slate); max-width: 60ch; }
+    .about-photo { display: flex; justify-content: flex-end; }
+    .about-photo img {
+      width: 100%; max-width: 230px; aspect-ratio: 1; object-fit: cover;
+      border-radius: 20px;
+      border: 3px solid #fff;
+      box-shadow: 0 12px 32px -10px rgba(10,110,209,0.35);
+    }
+    .linkedin {
+      display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.2rem;
+      color: var(--blue); font-weight: 600; font-size: 0.98rem;
+    }
+    .linkedin:hover { text-decoration: underline; }
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 2.5rem 0; }
     .about-grid h2 { font-size: var(--step-1); }
-    .contact-card { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
-      background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
-      padding: 1.6rem 1.8rem; flex-wrap: wrap; }
-    .contact-card h2 { font-size: var(--step-1); margin-bottom: 0.2rem; }
-    .contact-card p { margin: 0; font-size: 0.95rem; }
     .disclaimer { font-size: 0.82rem; margin-top: 2.5rem; }
-    @media (max-width: 700px) { .about-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 760px) {
+      .about-head { grid-template-columns: 1fr; }
+      .about-photo { justify-content: flex-start; order: -1; }
+      .about-photo img { max-width: 160px; }
+      .about-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </Base>
