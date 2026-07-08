@@ -9,6 +9,7 @@ const pages = [
   { url: '/guides/install-sap-gui-windows/', priority: '0.8', freq: 'monthly' },
   { url: '/guides/install-sap-gui-mac/', priority: '0.8', freq: 'monthly' },
   { url: '/guides/backup-sap-gui-settings/', priority: '0.8', freq: 'monthly' },
+  { url: '/guides/cloud-backup-sap-logon/', priority: '0.7', freq: 'monthly' },
   { url: '/guides/add-system-to-sap-logon/', priority: '0.7', freq: 'monthly' },
   { url: '/guides/configure-sap-router/', priority: '0.7', freq: 'monthly' },
   { url: '/guides/sap-logon-vs-sap-logon-pad/', priority: '0.7', freq: 'monthly' },
