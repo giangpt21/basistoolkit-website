@@ -144,6 +144,18 @@ const jsonLd = {
     </div>
   </section>
 
+  <!-- MISSION STATEMENT -->
+  <section class="mission">
+    <div class="wrap">
+      <blockquote class="mission-quote">
+        <span class="mission-mark" aria-hidden="true">&ldquo;</span>
+        More than a way to move connections, SAP Logon Transfer is built to give you the
+        <em>simplest, friendliest</em> way to back up and share your SAP setup with others.
+        <span class="mission-mark mission-mark-close" aria-hidden="true">&rdquo;</span>
+      </blockquote>
+    </div>
+  </section>
+
   <!-- TOOL / FEATURES -->
   <section class="section" id="tool">
     <div class="wrap">
@@ -250,6 +262,24 @@ const jsonLd = {
     .hero-actions { display: flex; gap: 0.8rem; margin-top: 1.8rem; flex-wrap: wrap; }
     .hero-path { margin-top: 1.6rem; font-size: var(--step--1); color: var(--slate-soft); display: flex; align-items: center; gap: 0.5rem; }
     .hero-path span { font-family: var(--font-mono); }
+
+    /* mission statement */
+    .mission { padding-block: clamp(3rem, 7vw, 5rem); }
+    .mission .wrap { max-width: 900px; }
+    .mission-quote {
+      position: relative; margin: 0; text-align: center;
+      font-family: var(--font-display); font-weight: 600;
+      font-size: clamp(1.4rem, 3.2vw, 2.1rem); line-height: 1.4;
+      color: var(--ink); padding: 0 clamp(1rem, 5vw, 3.5rem);
+    }
+    .mission-quote em { color: var(--blue); font-style: normal; }
+    .mission-mark {
+      font-family: Georgia, 'Times New Roman', serif;
+      color: var(--amber); font-weight: 700;
+      font-size: clamp(3rem, 8vw, 5rem); line-height: 0;
+      position: relative; top: 0.35em;
+    }
+    .mission-mark-close { top: 0.5em; }
 
     /* signature visual */
     .hero-visual { position: relative; display: flex; align-items: center; justify-content: center; }
