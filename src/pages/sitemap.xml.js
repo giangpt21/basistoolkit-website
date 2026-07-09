@@ -16,6 +16,7 @@ const pages = [
   { url: '/guides/what-is-sapuilandscape-xml/', priority: '0.8', freq: 'monthly' },
   { url: '/guides/install-sap-logon-transfer/', priority: '0.7', freq: 'monthly' },
   { url: '/about/', priority: '0.4', freq: 'monthly' },
+  { url: '/contact/', priority: '0.4', freq: 'monthly' },
   { url: '/privacy/', priority: '0.3', freq: 'yearly' },
   { url: '/terms/', priority: '0.3', freq: 'yearly' },
 ];

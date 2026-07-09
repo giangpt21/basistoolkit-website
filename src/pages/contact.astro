@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+
+const linkedinUrl = 'https://www.linkedin.com/in/giangpt/';
+---
+<Base
+  title="Contact us | BasisToolkit"
+  description="Get in touch with BasisToolkit — questions, feedback or bug reports about SAP Logon Transfer and our SAP Basis guides."
+  path="/contact/"
+>
+  <section class="contact">
+    <div class="wrap contact-wrap">
+      <span class="eyebrow">Contact</span>
+      <h1>Get in touch</h1>
+      <p class="lead">
+        Questions, feedback, or found a bug? We'd like to hear from you. BasisToolkit is
+        maintained by a working SAP Basis consultant, and every message is read.
+      </p>
+
+      <div class="contact-cards">
+        <a class="contact-card" href={linkedinUrl} target="_blank" rel="noopener">
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+            </svg>
+          </span>
+          <div>
+            <h2>LinkedIn</h2>
+            <p class="muted">Connect and message directly on LinkedIn — the fastest way to reach the author.</p>
+          </div>
+        </a>
+
+        <div class="contact-card">
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 7l8 6 8-6"/></svg>
+          </span>
+          <div>
+            <h2>Bug reports &amp; features</h2>
+            <p class="muted">Found something that doesn't work, or have an idea? Reach out via LinkedIn with the details and we'll take a look.</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="sec-h">What we can help with</h2>
+      <ul class="contact-list">
+        <li>Questions about using SAP Logon Transfer — export, import, cloud backup, compare</li>
+        <li>Reporting a bug or unexpected behaviour</li>
+        <li>Suggesting a feature or a new guide topic</li>
+        <li>Feedback on the guides or the website</li>
+      </ul>
+
+      <p class="muted note">
+        BasisToolkit is a free, independent project. We aim to reply to genuine questions
+        and reports, though response times may vary.
+      </p>
+    </div>
+  </section>
+
+  <style>
+    .contact-wrap { max-width: 780px; padding-block: clamp(2.5rem, 6vw, 4rem); }
+    .contact h1 { font-size: var(--step-3); }
+    .contact .lead { font-size: var(--step-1); color: var(--slate); max-width: 56ch; }
+    .contact-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+    .contact-card { display: flex; gap: 1rem; align-items: flex-start; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4rem; color: var(--ink); transition: border-color .15s, transform .15s; }
+    a.contact-card:hover { border-color: var(--blue); transform: translateY(-2px); }
+    .contact-icon { flex: none; width: 44px; height: 44px; border-radius: 11px; background: var(--blue-tint); color: var(--blue); display: flex; align-items: center; justify-content: center; }
+    .contact-icon svg { width: 22px; height: 22px; }
+    .contact-card h2 { font-size: 1.05rem; margin: 0.1rem 0 0.3rem; }
+    .contact-card p { margin: 0; font-size: 0.92rem; }
+    .sec-h { font-size: var(--step-1); margin-top: 2rem; margin-bottom: 0.8rem; }
+    .contact-list { color: var(--slate); line-height: 1.8; padding-left: 1.2rem; }
+    .note { margin-top: 2rem; font-size: 0.9rem; }
+    @media (max-width: 620px) { .contact-cards { grid-template-columns: 1fr; } }
+  </style>
+</Base>
